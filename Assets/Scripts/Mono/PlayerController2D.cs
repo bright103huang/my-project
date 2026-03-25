@@ -7,24 +7,24 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController2D : MonoBehaviour
 {
-    [Header("--- ÎïÀí & ¶¯×÷²ÎÊý ---")]
+    [Header("--- ï¿½ï¿½ï¿½ï¿½ & ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ---")]
     public float speed = 4f;
     public float shakeDelay = 0.2f;
     public float actionCooldown = 1.0f;
     public float fallYOffset = -0.75f;
 
-    [Header("--- ×ÊÔ´ÒýÓÃ (SO/UI/Anim) ---")]
+    [Header("--- ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½ (SO/UI/Anim) ---")]
     public TextMeshProUGUI statusText;
     public Animator anim;
     public Transform modelTransform;
     public ActionExecutor executor;
     public StateRuntime runtime;
-    public ActionDefinition hitTreeAction; // ×²Ê÷SO
-    public ActionDefinition restAction;    // ÐÝÏ¢SO
+    public ActionDefinition hitTreeAction; // ×²ï¿½ï¿½SO
+    public ActionDefinition restAction;    // ï¿½ï¿½Ï¢SO
 
     private Rigidbody2D rb;
-    private bool isLocked = false;      // ±ÀÀ£Ëø
-    private bool isBusy = false;        // ¶¯×÷Ëø
+    private bool isLocked = false;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private bool isBusy = false;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private bool nearTree = false;
     private TreeVisual currentTree;
     private string logMessage = "Standing still is the only safe move.";
@@ -60,7 +60,7 @@ public class PlayerController2D : MonoBehaviour
         if (bgImage != null)
         {
             RectTransform bgRt = bgImage.GetComponent<RectTransform>();
-            bgRt.sizeDelta = new Vector2(bgRt.sizeDelta.x, 320); // ÑÓÉìºÚ²£Á§¸ß¶È
+            bgRt.sizeDelta = new Vector2(bgRt.sizeDelta.x, 320); // ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ß¶ï¿½
             bgRt.pivot = new Vector2(0.5f, 1);
         }
     }
@@ -71,7 +71,7 @@ public class PlayerController2D : MonoBehaviour
 
         UpdateDisplay();
 
-        // Âß¼­Õ¢ÃÅ£º±ÀÀ£×´Ì¬
+        // ï¿½ß¼ï¿½Õ¢ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
         if (isLocked)
         {
             rb.velocity = Vector2.zero;
@@ -79,7 +79,7 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        // Âß¼­Õ¢ÃÅ£º¶¯×÷×´Ì¬
+        // ï¿½ß¼ï¿½Õ¢ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
         if (isBusy)
         {
             rb.velocity = Vector2.zero;
@@ -133,14 +133,14 @@ public class PlayerController2D : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            // ²ß»®Ð£Ñé 1£ºÊÇ·ñÔÚ·¶Î§ÄÚ
+            // ï¿½ß»ï¿½Ð£ï¿½ï¿½ 1ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ú·ï¿½Î§ï¿½ï¿½
             if (!nearTree)
             {
                 logMessage = "<color=orange>Tree not found. Fighting shadows?</color>";
                 return;
             }
 
-            // ²ß»®Ð£Ñé 2£ºÊýÖµ³¬±êÅÐ¶¨ (Energy²»×ã)
+            // ï¿½ß»ï¿½Ð£ï¿½ï¿½ 2ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ (Energyï¿½ï¿½ï¿½ï¿½)
             if (runtime.Get("Energy") < 10)
             {
                 logMessage = "<color=red>Too weak to swing. Go home.</color>";
@@ -173,29 +173,29 @@ public class PlayerController2D : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            // µ÷ÓÃ SO µÄºó¹û£º¼õÉÙÆ£ÀÍ
+            // ï¿½ï¿½ï¿½ï¿½ SO ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½
             if (executor != null && restAction != null) executor.Execute(restAction);
 
-            // ×´Ì¬»ú´¥·¢£º´Ó Convulse ÇÐ»»µ½ Resting
-            if (anim != null) anim.SetTrigger("Rest");
+            // ×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Convulse ï¿½Ð»ï¿½ï¿½ï¿½ Resting
+            if (anim != null) anim.SetTrigger(" Rest ");
 
             logMessage = "Resting... Regretting life choices.";
         }
 
-        // ×Ô¶¯ËÕÐÑÅÐ¶¨
+        // ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
         if (runtime.Get("Fatigue") < 40)
         {
             isLocked = false;
             if (modelTransform != null) modelTransform.localPosition = Vector3.zero;
 
-            // ×´Ì¬»ú´¥·¢£º´Ó Resting ÇÐ»»µ½ Idle
+            // ×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Resting ï¿½Ð»ï¿½ï¿½ï¿½ Idle
             if (anim != null) anim.SetTrigger("WakeUp");
 
             logMessage = "Back on your feet. Go hit that tree!";
         }
     }
 
-    // ÓÉºó¶ËÏµÍ³¼ì²âµ½ Fatigue=100 Ê±µ÷ÓÃ
+    // ï¿½Éºï¿½ï¿½ÏµÍ³ï¿½ï¿½âµ½ Fatigue=100 Ê±ï¿½ï¿½ï¿½ï¿½
     public void LockPlayer(string message)
     {
         if (isLocked) return;
@@ -203,7 +203,7 @@ public class PlayerController2D : MonoBehaviour
         isBusy = false;
         rb.velocity = Vector2.zero;
 
-        // Ç¿ÖÆ½øÈë³é´¤×´Ì¬
+        // Ç¿ï¿½Æ½ï¿½ï¿½ï¿½é´¤×´Ì¬
         if (anim != null) anim.Play("Convulse", 0, 0f);
         if (modelTransform != null) modelTransform.localPosition = new Vector3(0, fallYOffset, 0);
 
