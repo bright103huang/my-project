@@ -415,8 +415,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aefbcb9f62006c44aa8a97c6ca91b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 4
+  shakeDelay: 1.5
+  actionCooldown: 1
+  fallYOffset: -2
+  statusText: {fileID: 0}
   anim: {fileID: 349493473}
+  modelTransform: {fileID: 0}
   executor: {fileID: 349493484}
   runtime: {fileID: 349493480}
   hitTreeAction: {fileID: 11400000, guid: e29052203959ac34d8f40cea2c9562fd, type: 2}
@@ -463,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e89e6e0da4be99940baa807344e5c83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runtime: {fileID: 0}
+  runtime: {fileID: 349493480}
 --- !u!114 &349493484
 MonoBehaviour:
   m_ObjectHideFlags: 0
