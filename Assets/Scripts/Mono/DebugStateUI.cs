@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-
 
 public class DebugStateUI : MonoBehaviour
 {
@@ -10,12 +6,26 @@ public class DebugStateUI : MonoBehaviour
 
     void OnGUI()
     {
-        if (runtime == null) return;
+        if (runtime == null)
+        {
+            GUI.Label(new Rect(10, 10, 300, 20), "runtime 未绑定！");
+            return;
+        }
 
-        GUI.Box(new Rect(10, 10, 200, 150), "玩家状态监控");
-        GUI.Label(new Rect(20, 30, 180, 20), "力量: " + runtime.Get("Strength"));
-        GUI.Label(new Rect(20, 50, 180, 20), "疲劳: " + runtime.Get("Fatigue"));
-        GUI.Label(new Rect(20, 70, 180, 20), "健康: " + runtime.Get("Health"));
-        GUI.Label(new Rect(20, 90, 180, 20), "能量: " + runtime.Get("Energy"));
+        var states = runtime.GetAllStates();
+
+        if (states == null)
+        {
+            GUI.Label(new Rect(10, 10, 300, 20), "states 未初始化！");
+            return;
+        }
+
+        int y = 10;
+
+        foreach (var kv in states)
+        {
+            GUI.Label(new Rect(10, y, 300, 20), $"{kv.Key}: {kv.Value:F0}");
+            y += 20;
+        }
     }
 }

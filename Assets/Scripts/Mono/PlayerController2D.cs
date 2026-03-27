@@ -6,16 +6,12 @@ using System.Text;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController2D : MonoBehaviour
 {
-    [Header("--- 基础设置 ---")]
     public float speed = 4f;
     public float shakeDelay = 0.2f;
     public float actionCooldown = 1.0f;
-    public float fallYOffset = -0.75f;
 
-    [Header("--- 资源引用 ---")]
     public TextMeshProUGUI statusText;
     public Animator anim;
-    public Transform modelTransform;
     public ActionExecutor executor;
     public StateRuntime runtime;
     public ActionDefinition hitTreeAction;
@@ -29,8 +25,6 @@ public class PlayerController2D : MonoBehaviour
 
     private string logMessage = "Standing still is the only safe move.";
 
-    private const string HIT_TREE_TRIGGER = "HitTree";
-
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,7 +32,6 @@ public class PlayerController2D : MonoBehaviour
         rb.freezeRotation = true;
 
         if (anim == null) anim = GetComponentInChildren<Animator>();
-        if (modelTransform == null && anim != null) modelTransform = anim.transform;
         if (statusText == null) statusText = FindObjectOfType<TextMeshProUGUI>();
 
         InitLayout();
@@ -46,34 +39,27 @@ public class PlayerController2D : MonoBehaviour
 
     void InitLayout()
     {
-        if (statusText == null) return;
-
         statusText.enableAutoSizing = true;
         statusText.fontSizeMin = 10;
         statusText.fontSizeMax = 16;
         statusText.alignment = TextAlignmentOptions.TopLeft;
-        statusText.enableWordWrapping = true;
-        statusText.overflowMode = TextOverflowModes.Overflow;
 
-        RectTransform textRt = statusText.GetComponent<RectTransform>();
-        textRt.anchorMin = new Vector2(0, 1);
-        textRt.anchorMax = new Vector2(0, 1);
-        textRt.pivot = new Vector2(0, 1);
-
-        textRt.sizeDelta = new Vector2(280, 600);
-        textRt.anchoredPosition = new Vector2(100, -75);
+        RectTransform rt = statusText.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0, 1);
+        rt.anchorMax = new Vector2(0, 1);
+        rt.pivot = new Vector2(0, 1);
+        rt.sizeDelta = new Vector2(280, 600);
+        rt.anchoredPosition = new Vector2(100, -75);
     }
 
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-
         UpdateDisplay();
 
         if (isLocked)
         {
             rb.velocity = Vector2.zero;
-            HandleRestLogic();
+            HandleRest();
             return;
         }
 
@@ -87,57 +73,6 @@ public class PlayerController2D : MonoBehaviour
         HandleAction();
     }
 
-    // ⭐ 休息与恢复逻辑（无 WakeUp，直接回 Idle）
-    void HandleRestLogic()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (executor != null && restAction != null)
-                executor.Execute(restAction);
-
-            if (anim != null)
-                anim.SetTrigger("Rest");
-
-            logMessage = "Standing still is the only safe move.";
-        }
-
-        // ⭐ 恢复判断
-        if (runtime.Get("Fatigue") < 40)
-        {
-            isLocked = false;
-
-            if (modelTransform != null)
-                modelTransform.localPosition = Vector3.zero;
-
-            // ⭐ 关键：强制回 Idle（没有 WakeUp）
-            if (anim != null)
-                anim.Play("Idle", 0, 0f);
-
-            logMessage = "Back on your feet. Ready!";
-        }
-    }
-
-    // ⭐ 抽搐锁定
-    public void LockPlayer(string message)
-    {
-        if (isLocked) return;
-
-        isLocked = true;
-        isBusy = false;
-        rb.velocity = Vector2.zero;
-
-        if (anim != null)
-        {
-            anim.ResetTrigger("Convulse");
-            anim.SetTrigger("Convulse");
-        }
-
-        if (modelTransform != null)
-            modelTransform.localPosition = new Vector3(0, fallYOffset, 0);
-
-        logMessage = "SYSTEM FAILURE: Press R to Rest.";
-    }
-
     void HandleMovement()
     {
         float h = Input.GetAxisRaw("Horizontal");
@@ -147,30 +82,53 @@ public class PlayerController2D : MonoBehaviour
 
         if (anim != null)
             anim.SetBool("isWalking", rb.velocity.magnitude > 0.1f);
-
-        if (h != 0)
-            transform.localScale = new Vector3(Mathf.Sign(h), 1, 1);
     }
 
     void HandleAction()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log($"F pressed | nearTree={nearTree} | isBusy={isBusy}");
-
-            if (nearTree && !isBusy)
+            if (!nearTree)
             {
-                StartCoroutine(PerformHitRoutine());
+                SetMessage("你试图隔空打牛，牛表示毫无压力。");
+                return;
             }
+
+            if (isBusy)
+            {
+                SetMessage("你还没缓过来，又想自残？");
+                return;
+            }
+
+            if (executor != null && !executor.CanExecute(hitTreeAction))
+            {
+                float energy = runtime.Get("Energy");
+                SetMessage($"你现在只有 {energy:F0} 点能量，树都懒得理你。");
+                return;
+            }
+
+            StartCoroutine(PerformHit());
         }
     }
 
-    IEnumerator PerformHitRoutine()
+    void HandleRest()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (executor != null && restAction != null)
+                executor.Execute(restAction);
+
+            if (anim != null)
+                anim.Play("Rest", 0, 0f);
+        }
+    }
+
+    IEnumerator PerformHit()
     {
         isBusy = true;
 
         if (anim != null)
-            anim.SetTrigger(HIT_TREE_TRIGGER);
+            anim.SetTrigger("HitTree");
 
         yield return new WaitForSeconds(shakeDelay);
 
@@ -180,37 +138,42 @@ public class PlayerController2D : MonoBehaviour
         if (executor != null)
             executor.Execute(hitTreeAction);
 
-        yield return new WaitForSeconds(Mathf.Max(0.1f, actionCooldown - shakeDelay));
+        yield return new WaitForSeconds(actionCooldown);
 
         isBusy = false;
     }
 
     void UpdateDisplay()
     {
-        if (statusText == null || runtime == null) return;
+        if (runtime == null) return;
 
         StringBuilder sb = new StringBuilder();
 
-        sb.AppendLine("<color=#FFD700><b>[ MONITOR ]</b></color>");
+        sb.AppendLine("<b>[ MONITOR ]</b>");
 
-        var states = runtime.GetAllStates();
-
-        foreach (var kv in states)
+        foreach (var kv in runtime.GetAllStates())
         {
             sb.AppendLine($"{kv.Key}: {kv.Value:F0}");
         }
 
-        if (isLocked)
-            sb.AppendLine("<color=red><b>RECOVERY MODE: Press R</b></color>");
-        else
-            sb.AppendLine(logMessage);
+        sb.AppendLine(logMessage);
 
         statusText.text = sb.ToString();
     }
 
+    public void SetLocked(bool value)
+    {
+        isLocked = value;
+    }
+
+    public void SetMessage(string msg)
+    {
+        logMessage = msg;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Tree") && !isLocked)
+        if (other.CompareTag("Tree"))
         {
             nearTree = true;
             currentTree = other.GetComponent<TreeVisual>();

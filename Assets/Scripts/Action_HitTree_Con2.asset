@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: 6c989b36c97e7ff4cb3e509d71981311, type: 2}
   type: 0
-  threshold: 20
+  threshold: 10
