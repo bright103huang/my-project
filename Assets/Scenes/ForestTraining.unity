@@ -419,9 +419,9 @@ MonoBehaviour:
   shakeDelay: 1.5
   actionCooldown: 1
   fallYOffset: -2
-  statusText: {fileID: 0}
+  statusText: {fileID: 348988863}
   anim: {fileID: 349493473}
-  modelTransform: {fileID: 0}
+  modelTransform: {fileID: 349493490}
   executor: {fileID: 349493484}
   runtime: {fileID: 349493480}
   hitTreeAction: {fileID: 11400000, guid: e29052203959ac34d8f40cea2c9562fd, type: 2}
@@ -438,24 +438,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527822aaf9c6fbb4e9499a3d9d6d5c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runtime: {fileID: 349493480}
   events:
   - {fileID: 11400000, guid: de9558e38959dd147ace6be5bf7fd693, type: 2}
-  OnEventTriggered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 349493481}
-        m_TargetAssemblyTypeName: PlayerController2D, Assembly-CSharp
-        m_MethodName: LockPlayer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  runtime: {fileID: 349493480}
+  applier: {fileID: 349493483}
 --- !u!114 &349493483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,6 +565,11 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_SortAtRoot: 0
+--- !u!4 &349493490 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
+  m_PrefabInstance: {fileID: 1706160915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,12 +821,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527822aaf9c6fbb4e9499a3d9d6d5c71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runtime: {fileID: 723637396}
   events:
   - {fileID: 11400000, guid: de9558e38959dd147ace6be5bf7fd693, type: 2}
-  OnEventTriggered:
-    m_PersistentCalls:
-      m_Calls: []
+  runtime: {fileID: 723637396}
+  applier: {fileID: 0}
 --- !u!114 &723637395
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,24 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Events; // <--- 必须加上这一行！
 
 public class EventManager : MonoBehaviour
 {
-    public StateRuntime runtime;
     public List<NarrativeEvent> events;
-    public UnityEvent<string> OnEventTriggered;
-    private HashSet<NarrativeEvent> triggeredOnce = new HashSet<NarrativeEvent>();
+    public StateRuntime runtime;
+    public ModifierApplier applier;
+
+    private Dictionary<string, bool> lastEventState = new Dictionary<string, bool>();
 
     void Update()
     {
+        CheckEvents();
+    }
+
+    void CheckEvents()
+    {
         foreach (var e in events)
         {
-            if (!triggeredOnce.Contains(e) && e.triggerCondition.Evaluate(runtime))
+            if (e.triggerCondition == null) continue;
+
+            bool current = e.triggerCondition.Evaluate(runtime);
+
+            if (!lastEventState.ContainsKey(e.eventID))
+                lastEventState[e.eventID] = false;
+
+            // ⭐ 只在 false → true 时触发
+            if (!lastEventState[e.eventID] && current)
             {
-                OnEventTriggered.Invoke(e.hintText);
-                foreach (var mod in e.consequences) runtime.Modify(mod.state.stateID, mod.value);
-                triggeredOnce.Add(e);
+                Debug.Log(e.narrativeText);
+                applier.Apply(e.modifiers);
             }
+
+            lastEventState[e.eventID] = current;
         }
     }
 }

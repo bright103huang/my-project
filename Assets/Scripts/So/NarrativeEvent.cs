@@ -1,11 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Events;
 
 [CreateAssetMenu(menuName = "NarrativeSandbox/Event")]
 public class NarrativeEvent : ScriptableObject
 {
+    public string eventID; // ⭐ 加这一行（关键）
+
     public Condition triggerCondition;
-    [TextArea] public string hintText;
-    public List<StateModifier> consequences;
+    public List<StateModifier> modifiers;
+
+    [TextArea]
+    public string narrativeText;
 }

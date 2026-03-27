@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2fa11939c9c61e4297c2854db65f227, type: 3}
   m_Name: ConvulseEvent
   m_EditorClassIdentifier: 
+  eventID: Convulse
   triggerCondition: {fileID: 11400000, guid: bee3246e0c7723f428aff68227a54af4, type: 2}
-  hintText: 
-  consequences: []
+  modifiers: []
+  narrativeText: 
