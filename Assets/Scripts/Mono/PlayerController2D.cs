@@ -127,9 +127,6 @@ public class PlayerController2D : MonoBehaviour
     {
         isBusy = true;
 
-        if (anim != null)
-            anim.SetTrigger("HitTree");
-
         yield return new WaitForSeconds(shakeDelay);
 
         if (currentTree != null)

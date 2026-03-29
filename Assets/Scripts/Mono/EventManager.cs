@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour
@@ -6,6 +7,9 @@ public class EventManager : MonoBehaviour
     public List<NarrativeEvent> events;
     public StateRuntime runtime;
     public ModifierApplier applier;
+
+    // ⭐ 新增：通知表现层的事件
+    public event Action<NarrativeEvent> OnEventTriggered;
 
     private Dictionary<string, bool> lastEventState = new Dictionary<string, bool>();
 
@@ -25,11 +29,12 @@ public class EventManager : MonoBehaviour
             if (!lastEventState.ContainsKey(e.eventID))
                 lastEventState[e.eventID] = false;
 
-            // ⭐ 只在 false → true 时触发
             if (!lastEventState[e.eventID] && current)
             {
-                Debug.Log(e.narrativeText);
-                applier.Apply(e.modifiers);
+                if (applier != null) applier.Apply(e.modifiers);
+                
+                // ⭐ 发送广播
+                OnEventTriggered?.Invoke(e);
             }
 
             lastEventState[e.eventID] = current;

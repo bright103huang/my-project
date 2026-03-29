@@ -6,9 +6,12 @@ public class ActionDefinition : ScriptableObject
 {
     public string actionID;
 
-    [Header("Ğ§¹û£¨×´Ì¬ĞŞ¸Ä£©")]
+    [Header("Logic")]
     public List<StateModifier> modifiers;
-
-    [Header("Ö´ĞĞÌõ¼ş£¨Îª¿Õ=ÓÀÔ¶¿ÉÖ´ĞĞ£©")]
     public Condition availabilityCondition;
+
+    [Header("Output (Visuals & Audio)")]
+    public string animTrigger; // åŠ¨ç”» Trigger åç§°
+    [TextArea]
+    public string[] humorousHints; // è¯¥åŠ¨ä½œè§¦å‘æ—¶çš„å¹½é»˜æç¤ºè¯åº“
 }
