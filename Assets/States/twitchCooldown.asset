@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f827ba7c903d574ab87d55cc7142ef2, type: 3}
-  m_Name: Action_HitTree_Con2
+  m_Script: {fileID: 11500000, guid: 7845fe5b398ca814288c2d3387385b49, type: 3}
+  m_Name: twitchCooldown
   m_EditorClassIdentifier: 
-  state: {fileID: 11400000, guid: 6c989b36c97e7ff4cb3e509d71981311, type: 2}
-  type: 0
-  threshold: 10
+  stateID: 'twitchCooldown '
+  initialValue: 0
+  maxValue: 100

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 884b96e78a1c1754f87d732d2564bdcd, type: 3}
-  m_Name: Action_HitTree_Condition
+  m_Name: Event_FatigueTwitch_Con
   m_EditorClassIdentifier: 
-  logic: 0
+  logic: 1
   conditions:
-  - {fileID: 11400000, guid: f041995f8d3582a479f36a6f609034c8, type: 2}
-  - {fileID: 11400000, guid: aa3ba5c4085e33244a78f9d7b1c00750, type: 2}
-  - {fileID: 11400000, guid: ec1b87f756406cc48948a64d35550163, type: 2}
+  - {fileID: 11400000, guid: 14c1b16945110f046ac7beecbc82d673, type: 2}
+  - {fileID: 11400000, guid: 68a2370e48778c343879fd1bf930be3d, type: 2}
+  - {fileID: 11400000, guid: 907fdf7bf39bcb1478650abdc1c33140, type: 2}

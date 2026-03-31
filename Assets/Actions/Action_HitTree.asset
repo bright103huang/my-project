@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31f40b6c98065b84797b8266f3340018, type: 3}
-  m_Name: HitTreeAction
+  m_Name: Action_HitTree
   m_EditorClassIdentifier: 
   actionID: HitTreeAction
+  duration: 1
+  priority: 0
+  animName: HitTree
+  message: 
   modifiers:
   - state: {fileID: 11400000, guid: 394e1a703c3246846b4a64903d879017, type: 2}
     value: 1
@@ -28,4 +32,3 @@ MonoBehaviour:
     value: -1
   - state: {fileID: 11400000, guid: 9f80efae72d6bde41bb6339adb3bc372, type: 2}
     value: -2
-  condition: {fileID: 0}

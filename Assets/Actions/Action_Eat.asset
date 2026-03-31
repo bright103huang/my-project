@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Action_Eat
   m_EditorClassIdentifier: 
   actionID: Action_Eat
-  description: 
+  duration: 1
+  priority: 0
+  animName: Eat
+  message: 
   modifiers:
   - state: {fileID: 11400000, guid: 6c989b36c97e7ff4cb3e509d71981311, type: 2}
     value: 25
   - state: {fileID: 11400000, guid: ade4080acb8e45a44a24bffb154a11a2, type: 2}
     value: 5
-  availabilityCondition: {fileID: 0}

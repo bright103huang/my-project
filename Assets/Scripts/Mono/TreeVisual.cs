@@ -1,11 +1,12 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class TreeVisual : MonoBehaviour
 {
     private Vector3 originalPos;
     private float shakeTimer = 0f;
-    public float shakeAmount = 0.15f; // »Î¶¯·ù¶È£¬¾õµÃ²»Ã÷ÏÔ¿ÉÒÔµ÷´ó
-    public float shakeDuration = 0.2f; // »Î¶¯³ÖĞøÊ±¼ä
+
+    public float shakeAmount = 0.15f;
+    public float shakeDuration = 0.2f;
 
     void Start()
     {
@@ -16,18 +17,17 @@ public class TreeVisual : MonoBehaviour
     {
         if (shakeTimer > 0)
         {
-            // Ëæ»úÎ»ÒÆ²úÉú¶¶¶¯
             transform.position = originalPos + (Vector3)Random.insideUnitCircle * shakeAmount;
             shakeTimer -= Time.deltaTime;
         }
         else
         {
-            transform.position = originalPos; // »Ö¸´Ô­Î»
+            transform.position = originalPos;
         }
     }
 
-    // ×²Ê÷Ê±ÓÉÍæ¼Ò´úÂëµ÷ÓÃÕâ¸ö·½·¨
-    public void Shake()
+    // âœ… æ”¹åï¼šä¸å†å¯¹å¤–æš´éœ²â€œShakeâ€ï¼Œè€Œæ˜¯å“åº”äº‹ä»¶
+    public void OnHitTree()
     {
         shakeTimer = shakeDuration;
     }

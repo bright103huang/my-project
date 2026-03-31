@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StateRuntime : MonoBehaviour
@@ -7,13 +8,16 @@ public class StateRuntime : MonoBehaviour
 
     private Dictionary<string, float> values;
 
+    // ✅ 关键：状态变化事件（核心升级点）
+    public event Action<string, float> OnStateChanged;
+
     void Awake()
     {
         values = new Dictionary<string, float>();
 
         if (stateDefinitions == null || stateDefinitions.Count == 0)
         {
-            Debug.LogError("❌ StateRuntime: 没有配置 stateDefinitions！");
+            Debug.LogError("❌ StateRuntime: stateDefinitions not configured!");
             return;
         }
 
@@ -21,13 +25,13 @@ public class StateRuntime : MonoBehaviour
         {
             if (def == null)
             {
-                Debug.LogError("❌ 有空的 StateDefinition！");
+                Debug.LogError("❌ Empty StateDefinition found!");
                 continue;
             }
 
             if (values.ContainsKey(def.stateID))
             {
-                Debug.LogWarning($"⚠ 重复状态ID: {def.stateID}");
+                Debug.LogWarning($"⚠ Duplicate State ID: {def.stateID}");
                 continue;
             }
 
@@ -39,13 +43,13 @@ public class StateRuntime : MonoBehaviour
     {
         if (values == null)
         {
-            Debug.LogError("❌ values 未初始化！");
+            Debug.LogError("❌ values not initialized!");
             return 0f;
         }
 
         if (!values.ContainsKey(id))
         {
-            Debug.LogError($"❌ 状态不存在: {id}");
+            Debug.LogError($"❌ State does not exist: {id}");
             return 0f;
         }
 
@@ -56,12 +60,15 @@ public class StateRuntime : MonoBehaviour
     {
         if (values == null || !values.ContainsKey(id))
         {
-            Debug.LogError($"❌ Modify失败，状态不存在: {id}");
+            Debug.LogError($"❌ Modify failed, state does not exist: {id}");
             return;
         }
 
         values[id] += amount;
         values[id] = Mathf.Clamp(values[id], 0, 100);
+
+        // 🔥 核心：广播状态变化
+        OnStateChanged?.Invoke(id, values[id]);
     }
 
     public Dictionary<string, float> GetAllStates()

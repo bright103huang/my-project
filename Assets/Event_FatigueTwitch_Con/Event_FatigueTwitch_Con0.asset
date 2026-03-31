@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f827ba7c903d574ab87d55cc7142ef2, type: 3}
-  m_Name: Action_HitTree_Con1
+  m_Name: Event_FatigueTwitch_Con0
   m_EditorClassIdentifier: 
-  state: {fileID: 11400000, guid: ade4080acb8e45a44a24bffb154a11a2, type: 2}
+  state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
   type: 0
-  threshold: 20
+  threshold: 90

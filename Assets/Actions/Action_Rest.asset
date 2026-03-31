@@ -10,22 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31f40b6c98065b84797b8266f3340018, type: 3}
-  m_Name: Action_HitTree
+  m_Name: Action_Rest
   m_EditorClassIdentifier: 
-  actionID: HitTreeAction
+  actionID: Action_Rest
+  duration: 1
+  priority: 0
+  animName: Rest
+  message: 
   modifiers:
-  - state: {fileID: 11400000, guid: 394e1a703c3246846b4a64903d879017, type: 2}
-    value: 1
-  - state: {fileID: 11400000, guid: 6c989b36c97e7ff4cb3e509d71981311, type: 2}
-    value: -4
-  - state: {fileID: 11400000, guid: 6f73aacd5ca83934a84a98b1ecd8afba, type: 2}
-    value: 0.2
-  - state: {fileID: 11400000, guid: 886ed9fdc9c112142b18a99ea9f0719c, type: 2}
-    value: 0.1
   - state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
-    value: 8
+    value: -10
   - state: {fileID: 11400000, guid: ade4080acb8e45a44a24bffb154a11a2, type: 2}
-    value: -1
+    value: 3
   - state: {fileID: 11400000, guid: 9f80efae72d6bde41bb6339adb3bc372, type: 2}
-    value: -2
-  condition: {fileID: 11400000, guid: eb82a79180f3f6949acc503259c3fdef, type: 2}
+    value: 5

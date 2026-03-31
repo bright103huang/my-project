@@ -1,17 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(menuName = "NarrativeSandbox/Action")]
+[CreateAssetMenu(menuName = "Game/Action")]
 public class ActionDefinition : ScriptableObject
 {
+    [Header("Basic")]
     public string actionID;
 
-    [Header("Logic")]
-    public List<StateModifier> modifiers;
-    public Condition availabilityCondition;
+    [Header("Timing")]
+    public float duration = 1f;
 
-    [Header("Output (Visuals & Audio)")]
-    public string animTrigger; // 动画 Trigger 名称
+    [Header("Priority")]
+    public int priority = 0;
+
+    [Header("Animation")]
+    public string animName;
+
+    [Header("UI")]
     [TextArea]
-    public string[] humorousHints; // 该动作触发时的幽默提示词库
+    public string message;
+
+    [Header("State Changes")]
+    public List<StateModifier> modifiers;
 }

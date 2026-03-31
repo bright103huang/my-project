@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fa11939c9c61e4297c2854db65f227, type: 3}
-  m_Name: ConvulseEvent
+  m_Script: {fileID: 11500000, guid: 5f827ba7c903d574ab87d55cc7142ef2, type: 3}
+  m_Name: Action_TrainTree_Con0
   m_EditorClassIdentifier: 
-  eventID: Convulse
-  triggerCondition: {fileID: 11400000, guid: bee3246e0c7723f428aff68227a54af4, type: 2}
-  modifiers: []
-  narrativeText: 
+  state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
+  type: 1
+  threshold: 91

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31f40b6c98065b84797b8266f3340018, type: 3}
-  m_Name: Action_Rest
+  m_Name: Action_Twitch
   m_EditorClassIdentifier: 
-  actionID: Action_Rest
-  description: 
+  actionID: Twitch
+  duration: 1.5
+  priority: 100
+  animName: Twitch
+  message: "\u4F60\u56E0\u75B2\u52B3\u8FC7\u5EA6\u800C\u62BD\u6410\uFF01"
   modifiers:
   - state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
-    value: -10
-  - state: {fileID: 11400000, guid: ade4080acb8e45a44a24bffb154a11a2, type: 2}
-    value: 3
-  - state: {fileID: 11400000, guid: 9f80efae72d6bde41bb6339adb3bc372, type: 2}
+    value: -20
+  - state: {fileID: 11400000, guid: b7098af118381ca4a98822bf01e90ff8, type: 2}
     value: 5
-  availabilityCondition: {fileID: 0}

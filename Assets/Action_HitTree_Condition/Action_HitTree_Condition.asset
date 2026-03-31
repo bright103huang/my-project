@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 884b96e78a1c1754f87d732d2564bdcd, type: 3}
-  m_Name: ConvulseCondition
+  m_Name: Action_HitTree_Condition
   m_EditorClassIdentifier: 
-  logic: 1
+  logic: 0
   conditions:
-  - {fileID: 11400000, guid: 14c1b16945110f046ac7beecbc82d673, type: 2}
-  - {fileID: 11400000, guid: 68a2370e48778c343879fd1bf930be3d, type: 2}
-  - {fileID: 11400000, guid: 907fdf7bf39bcb1478650abdc1c33140, type: 2}
+  - {fileID: 11400000, guid: 63c55725d7a993e47b5554aae1809f4f, type: 2}
+  - {fileID: 11400000, guid: 9f207b907dd823a4b804bf6df55bd3ea, type: 2}
+  - {fileID: 11400000, guid: 0fb3f6822a84e7046bc8b8102f0be14c, type: 2}
