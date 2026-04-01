@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f40b6c98065b84797b8266f3340018, type: 3}
   m_Name: Action_Eat
   m_EditorClassIdentifier: 
-  actionID: Action_Eat
-  duration: 1
+  actionID: Eat
+  duration: 1.5
   priority: 0
   animName: Eat
-  message: 
+  message: this feeling is good!
   modifiers:
   - state: {fileID: 11400000, guid: 6c989b36c97e7ff4cb3e509d71981311, type: 2}
     value: 25

@@ -58,7 +58,13 @@ public class StateRuntime : MonoBehaviour
 
     public void Modify(string id, float amount)
     {
-        if (values == null || !values.ContainsKey(id))
+        if (values == null)
+        {
+            Debug.LogError("❌ values not initialized!");
+            return;
+        }
+
+        if (!values.ContainsKey(id))
         {
             Debug.LogError($"❌ Modify failed, state does not exist: {id}");
             return;
@@ -69,6 +75,25 @@ public class StateRuntime : MonoBehaviour
 
         // 🔥 核心：广播状态变化
         OnStateChanged?.Invoke(id, values[id]);
+    }
+
+    // ✅ 新增：支持直接传入 StateDefinition，自动修复“状态未注册”问题
+    public void Modify(StateDefinition def, float amount)
+    {
+        if (def == null) return;
+
+        if (values == null) values = new Dictionary<string, float>();
+
+        if (!values.ContainsKey(def.stateID))
+        {
+            Debug.Log($"🆕 [StateRuntime] 动态注册缺失状态: {def.stateID}");
+            values[def.stateID] = def.initialValue;
+            
+            if (stateDefinitions == null) stateDefinitions = new List<StateDefinition>();
+            if (!stateDefinitions.Contains(def)) stateDefinitions.Add(def);
+        }
+
+        Modify(def.stateID, amount);
     }
 
     public Dictionary<string, float> GetAllStates()

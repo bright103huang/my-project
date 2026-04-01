@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f40b6c98065b84797b8266f3340018, type: 3}
   m_Name: Action_HitTree
   m_EditorClassIdentifier: 
-  actionID: HitTreeAction
-  duration: 1
-  priority: 0
+  actionID: HitTree
+  duration: 2
+  priority: 10
   animName: HitTree
-  message: 
+  message: I will kill you..
   modifiers:
   - state: {fileID: 11400000, guid: 394e1a703c3246846b4a64903d879017, type: 2}
     value: 1

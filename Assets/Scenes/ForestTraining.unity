@@ -274,8 +274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df5278cd3b1ae248b0432662fd67b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hintText: {fileID: 348988863}
-  eventManager: {fileID: 349493482}
 --- !u!114 &348988863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,9 +428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   events:
-  - {fileID: 11400000, guid: de9558e38959dd147ace6be5bf7fd693, type: 2}
+  - {fileID: 11400000, guid: 166b3d643657b9c49b917242bc336e18, type: 2}
   runtime: {fileID: 349493480}
-  executor: {fileID: 0}
+  executor: {fileID: 349493484}
 --- !u!114 &349493483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +478,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runtime: {fileID: 349493480}
+  debugText: {fileID: 348988863}
+  fontSize: 14
+  offset: {x: 20, y: -20}
+  uiSize: {x: 400, y: 500}
 --- !u!50 &349493487
 Rigidbody2D:
   serializedVersion: 4
@@ -564,37 +566,6 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_SortAtRoot: 0
---- !u!114 &349493490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349493469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf811c2680c2b64fadd52e0626ec898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fatigueRedLine: 90
-  energyRedLine: 10
---- !u!114 &349493492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349493469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09817e3996cd7b5488012037e7d77b0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventManager: {fileID: 349493482}
-  actionExecutor: {fileID: 349493484}
-  playerController: {fileID: 349493481}
-  _activeEvent: {fileID: 0}
-  _waitingForResolution: 0
 --- !u!114 &349493494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,7 +857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   events:
-  - {fileID: 11400000, guid: de9558e38959dd147ace6be5bf7fd693, type: 2}
+  - {fileID: 0}
   runtime: {fileID: 723637396}
   executor: {fileID: 0}
 --- !u!114 &723637395
@@ -1301,10 +1272,16 @@ PrefabInstance:
       addedObject: {fileID: 349493480}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 349493484}
+      addedObject: {fileID: 349493495}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 349493496}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 349493483}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 349493484}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 349493482}
@@ -1316,6 +1293,9 @@ PrefabInstance:
       addedObject: {fileID: 349493486}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 349493494}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 349493487}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
       insertIndex: -1
@@ -1323,21 +1303,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 349493489}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 349493490}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 349493492}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 349493496}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 349493495}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 349493494}
     - targetCorrespondingSourceObject: {fileID: -3420941610899207910, guid: f28e1c548b027604895bbcb3590d6f76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1723578141}

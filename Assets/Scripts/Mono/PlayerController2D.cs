@@ -7,7 +7,6 @@ public class PlayerController2D : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    // 👉 注入“请求入口”
     public ActionRequester actionRequester;
 
     void Awake()
@@ -15,6 +14,9 @@ public class PlayerController2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
+
+        if (actionRequester == null) actionRequester = GetComponent<ActionRequester>();
+        if (actionRequester == null) actionRequester = GetComponentInChildren<ActionRequester>();
     }
 
     void Update()
@@ -26,7 +28,7 @@ public class PlayerController2D : MonoBehaviour
             actionRequester.Request("HitTree");
         }
 
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             actionRequester.Request("Rest");
         }
@@ -39,7 +41,5 @@ public class PlayerController2D : MonoBehaviour
 
         Vector2 moveDir = new Vector2(h, v).normalized;
         rb.velocity = moveDir * speed;
-
-        // 👉 这里也可以改成请求（后面升级）
     }
 }

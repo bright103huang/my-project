@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f40b6c98065b84797b8266f3340018, type: 3}
   m_Name: Action_Rest
   m_EditorClassIdentifier: 
-  actionID: Action_Rest
-  duration: 1
-  priority: 0
+  actionID: Rest
+  duration: 2
+  priority: 5
   animName: Rest
-  message: 
+  message: just a minute..
   modifiers:
   - state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
     value: -10

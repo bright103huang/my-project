@@ -12,11 +12,22 @@ public class ActionExecutor : MonoBehaviour
     public AnimationApplier animationApplier;
     public UIApplier uiApplier;
 
+    void Awake()
+    {
+        if (modifierApplier == null) modifierApplier = GetComponent<ModifierApplier>();
+        if (animationApplier == null) animationApplier = GetComponent<AnimationApplier>();
+        if (uiApplier == null) uiApplier = GetComponent<UIApplier>();
+
+        if (modifierApplier == null) modifierApplier = GetComponentInChildren<ModifierApplier>();
+        if (animationApplier == null) animationApplier = GetComponentInChildren<AnimationApplier>();
+        if (uiApplier == null) uiApplier = GetComponentInChildren<UIApplier>();
+    }
+
     private bool isBusy = false;
 
-    // ✅ 根据ID执行（给 ActionRequester 用）
     public void ExecuteByID(string actionID)
     {
+        if (actions == null) return;
         ActionDefinition action = actions.Find(a => a.actionID == actionID);
 
         if (action == null)
@@ -28,7 +39,6 @@ public class ActionExecutor : MonoBehaviour
         Execute(action);
     }
 
-    // ✅ 执行 Action
     public void Execute(ActionDefinition action)
     {
         if (action == null || isBusy)
@@ -37,15 +47,23 @@ public class ActionExecutor : MonoBehaviour
         StartCoroutine(RunAction(action));
     }
 
-    // ✅ 核心执行流程（只负责“发请求”）
+    private Dictionary<float, WaitForSeconds> waitCache = new Dictionary<float, WaitForSeconds>();
+
+    private WaitForSeconds GetWait(float seconds)
+    {
+        if (!waitCache.ContainsKey(seconds))
+            waitCache[seconds] = new WaitForSeconds(seconds);
+        return waitCache[seconds];
+    }
+
     private IEnumerator RunAction(ActionDefinition action)
     {
         isBusy = true;
 
+        yield return null;
+
         Debug.Log($"EXECUTOR: 执行 [{action.actionID}]");
 
-        // 1️⃣ 动画请求（不直接播放！）
-        // 🔥 发送动画请求（修复版）
         if (animationApplier != null && !string.IsNullOrEmpty(action.animName))
         {
             AnimationRequest request = new AnimationRequest(
@@ -57,13 +75,11 @@ public class ActionExecutor : MonoBehaviour
             animationApplier.Apply(request);
         }
 
-        // 2️⃣ 数值修改请求
         if (modifierApplier != null && action.modifiers != null && action.modifiers.Count > 0)
         {
             modifierApplier.Apply(action.modifiers);
         }
 
-        // 3️⃣ UI请求
         if (uiApplier != null && !string.IsNullOrEmpty(action.message))
         {
             uiApplier.Apply(new UIRequest
@@ -74,15 +90,13 @@ public class ActionExecutor : MonoBehaviour
             });
         }
 
-        // 4️⃣ 等待动作时间（只控制节奏）
-        yield return new WaitForSeconds(action.duration);
+        yield return GetWait(action.duration);
 
         isBusy = false;
 
         Debug.Log($"EXECUTOR: 完成 [{action.actionID}]");
     }
 
-    // ✅ 强制执行（用于高优先级事件，例如“抽搐”）
     public void ForceExecute(ActionDefinition action)
     {
         if (action == null)

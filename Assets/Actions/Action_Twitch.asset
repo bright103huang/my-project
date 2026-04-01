@@ -16,7 +16,7 @@ MonoBehaviour:
   duration: 1.5
   priority: 100
   animName: Twitch
-  message: "\u4F60\u56E0\u75B2\u52B3\u8FC7\u5EA6\u800C\u62BD\u6410\uFF01"
+  message: I am so tired..
   modifiers:
   - state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
     value: -20

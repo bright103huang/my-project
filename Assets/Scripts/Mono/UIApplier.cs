@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UIApplier : MonoBehaviour
 {
@@ -11,17 +12,26 @@ public class UIApplier : MonoBehaviour
 
     public void Apply(UIRequest request)
     {
-        // ÓÅÏÈ¼¶ÅÐ¶Ï
+        // ï¿½ï¿½ï¿½È¼ï¿½ï¿½Ð¶ï¿½
         if (currentRequest != null && request.priority < currentRequest.priority)
             return;
 
         currentRequest = request;
 
-        // Í£µôÖ®Ç°µÄÏÔÊ¾
+        // Í£ï¿½ï¿½Ö®Ç°ï¿½ï¿½ï¿½ï¿½Ê¾
         if (currentRoutine != null)
             StopCoroutine(currentRoutine);
 
         currentRoutine = StartCoroutine(ShowMessage(request));
+    }
+
+    private Dictionary<float, WaitForSeconds> waitCache = new Dictionary<float, WaitForSeconds>();
+
+    private WaitForSeconds GetWait(float seconds)
+    {
+        if (!waitCache.ContainsKey(seconds))
+            waitCache[seconds] = new WaitForSeconds(seconds);
+        return waitCache[seconds];
     }
 
     private IEnumerator ShowMessage(UIRequest request)
@@ -29,7 +39,7 @@ public class UIApplier : MonoBehaviour
         hintText.text = request.message;
         hintText.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(request.duration);
+        yield return GetWait(request.duration);
 
         hintText.gameObject.SetActive(false);
         currentRequest = null;

@@ -39,16 +39,16 @@ public class EventManager : MonoBehaviour
 
             bool current = e.triggerCondition.Evaluate(runtime);
 
-            if (!lastEventState.ContainsKey(e.eventID))
-                lastEventState[e.eventID] = false;
-
             // ✅ 只在“从false → true”触发
-            if (!lastEventState[e.eventID] && current)
+            if (current && (!lastEventState.ContainsKey(e.eventID) || !lastEventState[e.eventID]))
             {
+                lastEventState[e.eventID] = true; // 🔥 先标记，防止递归重触发
                 TriggerEvent(e);
             }
-
-            lastEventState[e.eventID] = current;
+            else
+            {
+                lastEventState[e.eventID] = current;
+            }
         }
     }
 
