@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f827ba7c903d574ab87d55cc7142ef2, type: 3}
+  m_Name: Evnet_WakeUp_Con
+  m_EditorClassIdentifier: 
+  state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
+  type: 1
+  threshold: 40

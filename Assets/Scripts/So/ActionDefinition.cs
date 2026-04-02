@@ -22,4 +22,10 @@ public class ActionDefinition : ScriptableObject
 
     [Header("State Changes")]
     public List<StateModifier> modifiers;
+
+    [Header("Looping")]
+    public Condition repeatCondition;
+
+    [Header("Chaining")]
+    public ActionDefinition fallbackAction;
 }

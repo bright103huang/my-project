@@ -429,6 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   events:
   - {fileID: 11400000, guid: 166b3d643657b9c49b917242bc336e18, type: 2}
+  - {fileID: 11400000, guid: 45f9eaeae46d7df4783eba889450ade5, type: 2}
   runtime: {fileID: 349493480}
   executor: {fileID: 349493484}
 --- !u!114 &349493483
@@ -465,6 +466,7 @@ MonoBehaviour:
   modifierApplier: {fileID: 349493483}
   animationApplier: {fileID: 349493496}
   uiApplier: {fileID: 349493495}
+  runtime: {fileID: 0}
 --- !u!114 &349493486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,7 +482,7 @@ MonoBehaviour:
   runtime: {fileID: 349493480}
   debugText: {fileID: 348988863}
   fontSize: 14
-  offset: {x: 20, y: -20}
+  offset: {x: 100, y: -100}
   uiSize: {x: 400, y: 500}
 --- !u!50 &349493487
 Rigidbody2D:
@@ -917,6 +919,7 @@ MonoBehaviour:
   modifierApplier: {fileID: 0}
   animationApplier: {fileID: 0}
   uiApplier: {fileID: 0}
+  runtime: {fileID: 0}
 --- !u!1 &791556536
 GameObject:
   m_ObjectHideFlags: 0

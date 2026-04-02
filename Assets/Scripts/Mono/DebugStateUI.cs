@@ -10,12 +10,12 @@ public class DebugStateUI : MonoBehaviour
 
     [Header("UI Layout Settings")]
     public float fontSize = 14f; // 调小字体
-    public Vector2 offset = new Vector2(20, -20); // 左上角偏移量
-    public Vector2 uiSize = new Vector2(400, 500);
+    public Vector2 offset = new Vector2(150, -200); // 向下向右移动
+    public Vector2 uiSize = new Vector2(500, 800); // 增加宽度和高度以显示更多行
 
-    private string[] displayOrder = { 
-        "StHealth", "StEnergy", "StFatigue", 
-        "StStrength", "StSkill", "StSpeed", "StSpirit" 
+    private string[] displayOrder = {
+        "Health", "Energy", "Fatigue",
+        "Strength", "Skill", "Speed", "Spirit"
     };
 
     void Awake()
@@ -68,6 +68,8 @@ public class DebugStateUI : MonoBehaviour
         RefreshAll();
     }
 
+    private string currentActionHint = ""; // 当前动作提示
+
     public void RefreshAll()
     {
         if (runtime == null || debugText == null) return;
@@ -89,21 +91,42 @@ public class DebugStateUI : MonoBehaviour
             }
         }
 
+        // 添加动作提示行（始终显示在状态下方）
+        if (!string.IsNullOrEmpty(currentActionHint))
+        {
+            sb.AppendLine(); // 空行分隔
+            sb.AppendLine($"<color=yellow>▶ {currentActionHint}</color>"); // 动作提示
+        }
+
         debugText.text = sb.ToString();
+    }
+
+    // 新增：显示动作提示
+    public void ShowActionHint(string message)
+    {
+        currentActionHint = message;
+        RefreshAll(); // 刷新显示以包含动作提示
+    }
+
+    // 新增：隐藏动作提示
+    public void HideActionHint()
+    {
+        currentActionHint = "";
+        RefreshAll(); // 刷新显示以移除动作提示
     }
 
     string GetLabel(string id)
     {
         switch (id)
         {
-            case "StHealth":   return "HP ";
-            case "StEnergy":   return "EN ";
-            case "StFatigue":  return "FTG";
-            case "StStrength": return "STR";
-            case "StSkill":    return "SKL";
-            case "StSpeed":    return "SPD";
-            case "StSpirit":   return "SPI";
-            default: return id.Replace("St", "");
+            case "Health":   return "HP ";
+            case "Energy":   return "EN ";
+            case "Fatigue":  return "FTG";
+            case "Strength": return "STR";
+            case "Skill":    return "SKL";
+            case "Speed":    return "SPD";
+            case "Spirit":   return "SPI";
+            default: return id;
         }
     }
 

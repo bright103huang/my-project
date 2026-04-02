@@ -10,15 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31f40b6c98065b84797b8266f3340018, type: 3}
-  m_Name: Action_Twitch
+  m_Name: Action_WakeUp
   m_EditorClassIdentifier: 
-  actionID: Twitch
-  duration: 1.5
-  priority: 15
-  animName: Twitch
-  message: I am so tired..
-  modifiers:
-  - state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
-    value: -0.2
-  repeatCondition: {fileID: 11400000, guid: 6e2f399bee7ea9c40b1e8e142b0e19d3, type: 2}
+  actionID: WakeUp
+  duration: 2
+  priority: 25
+  animName: WakeUp
+  message: I feel better now!
+  modifiers: []
+  repeatCondition: {fileID: 0}
   fallbackAction: {fileID: 0}

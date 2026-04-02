@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7845fe5b398ca814288c2d3387385b49, type: 3}
-  m_Name: twitchCooldown
+  m_Script: {fileID: 11500000, guid: 5f827ba7c903d574ab87d55cc7142ef2, type: 3}
+  m_Name: Event_FatigueTwitch_Con1
   m_EditorClassIdentifier: 
-  stateID: 'twitchCooldown '
-  initialValue: 0
-  maxValue: 100
+  state: {fileID: 11400000, guid: 6c989b36c97e7ff4cb3e509d71981311, type: 2}
+  type: 1
+  threshold: 10

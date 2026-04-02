@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionID: Drink
   duration: 1.5
-  priority: 0
+  priority: 21
   animName: Drink
   message: drinking water..
   modifiers:

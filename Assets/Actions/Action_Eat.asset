@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionID: Eat
   duration: 1.5
-  priority: 0
+  priority: 22
   animName: Eat
   message: this feeling is good!
   modifiers:

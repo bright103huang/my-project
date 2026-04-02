@@ -36,12 +36,23 @@ public class UIApplier : MonoBehaviour
 
     private IEnumerator ShowMessage(UIRequest request)
     {
-        hintText.text = request.message;
-        hintText.gameObject.SetActive(true);
+        // 检查是否有DebugStateUI，如果有则不显示hintText
+        DebugStateUI debugUI = FindObjectOfType<DebugStateUI>();
+        if (debugUI == null)
+        {
+            // 没有DebugStateUI时才使用hintText
+            hintText.text = request.message;
+            hintText.gameObject.SetActive(true);
+        }
 
         yield return GetWait(request.duration);
 
-        hintText.gameObject.SetActive(false);
+        // 只有没有DebugStateUI时才隐藏hintText
+        if (debugUI == null)
+        {
+            hintText.gameObject.SetActive(false);
+        }
+
         currentRequest = null;
     }
 }

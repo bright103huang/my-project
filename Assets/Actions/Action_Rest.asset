@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionID: Rest
   duration: 2
-  priority: 5
+  priority: 16
   animName: Rest
   message: just a minute..
   modifiers:
@@ -24,3 +24,7 @@ MonoBehaviour:
     value: 3
   - state: {fileID: 11400000, guid: 9f80efae72d6bde41bb6339adb3bc372, type: 2}
     value: 5
+  - state: {fileID: 11400000, guid: 6c989b36c97e7ff4cb3e509d71981311, type: 2}
+    value: 2
+  repeatCondition: {fileID: 0}
+  fallbackAction: {fileID: 11400000, guid: a412a66823110104fa9abe9935ad8de2, type: 2}
