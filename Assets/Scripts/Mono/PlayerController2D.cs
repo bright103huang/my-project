@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerController2D : MonoBehaviour
 {
     public float speed = 5f;
+    public float rotationSpeed = 1440f;
+    public float rotationOffset = 180f; 
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -17,6 +19,9 @@ public class PlayerController2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
+
+        // 强制禁用根运动，防止动画文件中的位移数据将角色拉回原点
+        if (animator != null) animator.applyRootMotion = false;
 
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
@@ -35,7 +40,11 @@ public class PlayerController2D : MonoBehaviour
         {
             if (isMoving)
             {
-                actionRequester.Request("Walk");
+                // 如果当前没有在播放 Walk 动画，再请求，防止每帧请求
+                if (animator != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+                {
+                    actionRequester.Request("Walk");
+                }
             }
             else
             {
@@ -68,16 +77,17 @@ public class PlayerController2D : MonoBehaviour
 
         isMoving = moveDir.magnitude > 0.1f;
 
-        // --- 修正转向逻辑：使用 Y 轴旋转 180 度 ---
-        if (h > 0.1f)
+        // --- 全方位面部跟随 ---
+        if (isMoving)
         {
-            // 向右移，旋转设为 0 度
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (h < -0.1f)
-        {
-            // 向左移，旋转设为 180 度
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            // 标准角度计算
+            float angle = Mathf.Atan2(moveDir.x, moveDir.y) * Mathf.Rad2Deg;
+            
+            // 使用偏移量，默认 180。如果脸还是反的，请在 Inspector 里把 rotationOffset 改为 0
+            float targetAngle = rotationOffset + angle;
+            
+            Quaternion targetRotation = Quaternion.Euler(0, targetAngle, 0);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }
