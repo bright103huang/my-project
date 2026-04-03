@@ -36,19 +36,27 @@ public class UIApplier : MonoBehaviour
 
     private IEnumerator ShowMessage(UIRequest request)
     {
-        // 检查是否有DebugStateUI，如果有则不显示hintText
         DebugStateUI debugUI = FindObjectOfType<DebugStateUI>();
-        if (debugUI == null)
+        
+        if (debugUI != null)
         {
-            // 没有DebugStateUI时才使用hintText
+            // 如果有 DebugStateUI，将提示信息显示在调试界面中
+            debugUI.ShowActionHint(request.message);
+        }
+        else if (hintText != null)
+        {
+            // 如果没有 DebugStateUI，使用传统的 hintText
             hintText.text = request.message;
             hintText.gameObject.SetActive(true);
         }
 
         yield return GetWait(request.duration);
 
-        // 只有没有DebugStateUI时才隐藏hintText
-        if (debugUI == null)
+        if (debugUI != null)
+        {
+            debugUI.HideActionHint();
+        }
+        else if (hintText != null)
         {
             hintText.gameObject.SetActive(false);
         }

@@ -16,7 +16,8 @@ MonoBehaviour:
   duration: 2
   priority: 10
   animName: HitTree
-  message: I will kill you..
+  message: "\u7EE7\u7EED\u7528\u529B\uFF0C\u6811\u5728\u7B11\u4F60\uFF0C\u8001\u4F19\u8BA1.."
+  failMessage: "\u4F60\u60F3\u9694\u5C71\u6253\u725B\u5417\uFF0C\u592A\u8FDC\u4E86\uFF01"
   modifiers:
   - state: {fileID: 11400000, guid: 394e1a703c3246846b4a64903d879017, type: 2}
     value: 1
@@ -32,3 +33,6 @@ MonoBehaviour:
     value: -1
   - state: {fileID: 11400000, guid: 9f80efae72d6bde41bb6339adb3bc372, type: 2}
     value: -2
+  startCondition: {fileID: 11400000, guid: fedcba9876543210fedcba9876543210, type: 2}
+  repeatCondition: {fileID: 0}
+  fallbackAction: {fileID: 0}

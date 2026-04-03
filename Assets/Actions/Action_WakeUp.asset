@@ -16,7 +16,9 @@ MonoBehaviour:
   duration: 2
   priority: 25
   animName: WakeUp
-  message: I feel better now!
+  message: "\u6298\u78E8\u6682\u65F6\u505C\u6B62\uFF0C\u65B0\u4E00\u8F6E\u7684\u81EA\u8650\u5F00\u59CB\u4E86..."
+  failMessage: 
   modifiers: []
+  startCondition: {fileID: 0}
   repeatCondition: {fileID: 0}
   fallbackAction: {fileID: 0}

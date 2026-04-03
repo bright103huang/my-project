@@ -26,8 +26,20 @@ public class TreeVisual : MonoBehaviour
         }
     }
 
-    // ✅ 改名：不再对外暴露“Shake”，而是响应事件
-    public void OnHitTree()
+    // ✅ 改名：不再对外暴露“Shake”，而是响应事件，支持延迟
+    public void OnHitTree(float delay = 1.5f)
+    {
+        if (delay > 0)
+        {
+            Invoke(nameof(StartShake), delay);
+        }
+        else
+        {
+            StartShake();
+        }
+    }
+
+    private void StartShake()
     {
         shakeTimer = shakeDuration;
     }

@@ -19,11 +19,14 @@ public class ActionDefinition : ScriptableObject
     [Header("UI")]
     [TextArea]
     public string message;
+    [TextArea]
+    public string failMessage;
 
     [Header("State Changes")]
     public List<StateModifier> modifiers;
 
-    [Header("Looping")]
+    [Header("Conditions")]
+    public Condition startCondition;
     public Condition repeatCondition;
 
     [Header("Chaining")]

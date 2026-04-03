@@ -16,7 +16,8 @@ MonoBehaviour:
   duration: 2
   priority: 16
   animName: Rest
-  message: just a minute..
+  message: "\u6DF1\u547C\u5438... \u8BD5\u56FE\u8BF4\u670D\u5FC3\u810F\u7EE7\u7EED\u8DF3\u52A8\uFF01rfrrrrrrr"
+  failMessage: 
   modifiers:
   - state: {fileID: 11400000, guid: 5f3f93f9d5d2a19439671223970e0a21, type: 2}
     value: -10
@@ -26,5 +27,6 @@ MonoBehaviour:
     value: 5
   - state: {fileID: 11400000, guid: 6c989b36c97e7ff4cb3e509d71981311, type: 2}
     value: 2
+  startCondition: {fileID: 0}
   repeatCondition: {fileID: 0}
-  fallbackAction: {fileID: 11400000, guid: a412a66823110104fa9abe9935ad8de2, type: 2}
+  fallbackAction: {fileID: 0}

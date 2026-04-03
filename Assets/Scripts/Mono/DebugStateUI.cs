@@ -78,7 +78,7 @@ public class DebugStateUI : MonoBehaviour
         if (states == null) return;
 
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine("<size=110%><color=#AAAAAA><b>[ CHARACTER STATUS ]</b></color></size>");
+        sb.AppendLine("<size=110%><b>[ 角色状态 ]</b></size>");
         sb.AppendLine("----------------------------------");
 
         foreach (var key in displayOrder)
@@ -95,7 +95,7 @@ public class DebugStateUI : MonoBehaviour
         if (!string.IsNullOrEmpty(currentActionHint))
         {
             sb.AppendLine(); // 空行分隔
-            sb.AppendLine($"<color=yellow>▶ {currentActionHint}</color>"); // 动作提示
+            sb.AppendLine($"<b>▶ {currentActionHint}</b>"); // 改为白色加粗（默认白）
         }
 
         debugText.text = sb.ToString();
@@ -119,13 +119,13 @@ public class DebugStateUI : MonoBehaviour
     {
         switch (id)
         {
-            case "Health":   return "HP ";
-            case "Energy":   return "EN ";
-            case "Fatigue":  return "FTG";
-            case "Strength": return "STR";
-            case "Skill":    return "SKL";
-            case "Speed":    return "SPD";
-            case "Spirit":   return "SPI";
+            case "Health":   return "生命值";
+            case "Energy":   return "能量值";
+            case "Fatigue":  return "疲劳度";
+            case "Strength": return "力量  ";
+            case "Skill":    return "技术  ";
+            case "Speed":    return "速度  ";
+            case "Spirit":   return "精神  ";
             default: return id;
         }
     }
